@@ -36,14 +36,14 @@ And here is the NAT translation table.
 
 ## Question 3
 
-**Subnet 2** has the last address of $176.31.251.255$ if I assume the first address is $176.31.251.0$ then the subnet would have $255$ addresses
-which is much more than the required $50$ addresses.
+**Subnet 2** has the last address of $176.31.251.255$ if I assume the first address is $176.31.251.192$ then the subnet would have $64$ addresses
+which is more than the required $50$ addresses.
 
-**Subnet 1** has the last address of $176.31.255.255$ if I assume the first address is $176.31.252.0$ then the subent would have $3 \times 255$ addresses
+**Subnet 1** has the last address of $176.31.255.255$ if I assume the first address is $176.31.252.0$ then the subent would have $4 \times 256$ addresses
 which is plenty more than the required $600$ addresses.
 
-**Subnet 3** would get all the other addresses before $176.31.251.0$ then it would have the first address of $172.16.0.0$ and the last address of
-$176.31.250.255$ then it would have way more than the required $200$ addresses.
+**Subnet 3** would get the other addresses before $176.31.251.192$ then it would have the first address of $176.31.250.192$ and the last address of
+$176.31.251.191$ then it would have $256$ addresses which is more than the required $200$ addresses.
 
 In the end the network prefix for the 3 subnets is:
 
@@ -51,12 +51,22 @@ $$
 \begin{split}
   subnet \ 1 \rightarrow 176.31.252.0/22
   \\
-  subnet \ 2 \rightarrow 176.31.251.0/24
+  subnet \ 2 \rightarrow 176.31.251.192/26
   \\
-  subnet \ 3 \rightarrow 172.16.0.0/6
+  subnet \ 3 \rightarrow 172.31.250.192/23
 \end{split}
 $$
 
 ## Question 4
+
+So it is possible to do the forwarding table like this:
+
+|  Network Prefix (Decimal)    |  Output Interface |
+|------------------------------|-------------------|
+|   128.119.40.128/26          |   Subnet A        |
+|   214.97.254.0/23            |   Router X        |
+|   223.1.17.0/23              |   Router W        |
+
+Which would work if we have the full cooporation of all the other routers but I do not think it is optimal.
 
 ## Question 5
