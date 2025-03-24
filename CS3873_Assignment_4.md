@@ -70,3 +70,14 @@ So it is possible to do the forwarding table like this:
 Which would work if we have the full cooporation of all the other routers but I do not think it is optimal.
 
 ## Question 5
+
+Using the new information the minimum cost to subnet C is $\text{cost}_{U \rightarrow Y} + \text{cost}_{Y \rightarrow Z}$
+which is equal to $35$.
+
+And f you calcualte the optimal path to subnet B both the minimum cost path would also be through router Y. Which makes the new forwardin table:
+
+| Network Prefix      | Output Interface |
+|---------------------|------------------|
+| 128.119.40.128/26   | Subnet A         |
+| 214.97.254.0/23     | Router Y         |
+| 223.1.17.0/23       | Router Y         |
